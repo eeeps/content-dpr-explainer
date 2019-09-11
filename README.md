@@ -192,3 +192,5 @@ This size is available to developers via the `.naturalWidth` and `.naturalHeight
 [Spec definition of density-corrected intrinsic dimensions](https://html.spec.whatwg.org/multipage/images.html#density-corrected-intrinsic-width-and-height)
 
 </dd>
+
+</dl>
