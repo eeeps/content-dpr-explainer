@@ -88,6 +88,109 @@ https://give.me/the-img.jpg?placeholder=true
 
 with downscaled images that behaved just like their full-scale counterparts, as far as layout is concerned.
 
+---
+
+## Glossary
 
 
+<dl>
+<dt>Replaced element</dt>
+<dd>
 
+Replaced elements are external things that are embedded in an HTML document. Common replaced elements include `<img>`, `<video>` `<iframe>`, `<object>`,  and `<embed>`.
+
+[MDN article on “replaced elements”](https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element)
+
+</dd>
+
+<dt>Intrinsic dimensions</dt>
+<dd>
+
+Like all replaced elements, `<img>` elements have “intrinsic dimensions.” Which is to say: they have their *own width and height.* `<img>` elements' final, laid-out display dimensions can be *modified* by CSS, but, left to their own devices, they'll occupy a fixed width and height on a webpage, based on the dimensions of the embedded image resource.
+
+For example: if you save a JPEG at a resolution of 800×600, when you stick it in an `<img>` element, by default, that `<img>` will have an intrinsic width of 800 CSS `px` and an intrinsic height of 600 CSS `px`.
+
+[Spec definition of “intrinsic dimensions”](https://drafts.csswg.org/css2/conform.html#intrinsic).
+
+</dd>
+
+<dt>Device (physical) pixel</dt>
+<dd>
+
+One pixel on a physical display.
+
+[Here's a zoomed-in picture of a bunch of device pixels](https://en.wikipedia.org/wiki/Pixel#/media/File:Closeup_of_pixels.JPG).
+
+</dd>
+
+<dt>CSS pixel</dt>
+<dd>
+
+One `px` in CSS.
+
+Because the creators of CSS were thinking ahead, the size of `1 px` is not strictly tied to the size of device pixels – or even to any kind of fixed, measurable length. Instead, [the length of a `px` is loosely tied to an *ideal visual angle.*](http://inamidst.com/stuff/notes/csspx) 🤯
+
+However, (probably because of its name?) for many years, web developers generally assumed that`1 px` == the length of one device pixel. This was a mostly-true (if fundamentally flawed) assumption until ~2012, when the advent of high-density (aka Hi-DPI, or ”Retina“) displays (containing very small pixels, very tightly packed) broke this assumption for good.
+
+[Spec definition of the `px` unit](https://drafts.csswg.org/css-values/#px)
+
+</dd>
+
+<dt>Device Pixel Ratio</dt>
+<dd>
+
+A ratio, of (linear) *physical device pixels* to *CSS pixels*. Every browsing context has one, set by the device/browser, and accessible to developers via `window.devicePixelRatio`.
+
+Before the advent of Hi-DPI displays, this ratio was usually 1:1 (aka, 1). Now, it can be all kinds of things.
+
+For example: on my iPhone, Mobile Safari is using a device pixel ratio of 2:1 (aka 2). This means that when I make an element `1px` wide, when I view it on my phone, it will stretch linearly across two physical device pixels.
+
+[dpi.lv](http://dpi.lv) is a fantastic resource which lists many different devices' resolutions and device pixel ratios.
+
+</dd>
+
+<dt>Image (logical) pixel</dt>
+<dd>
+
+One pixel in a digital image. All [bitmap images(https://en.wikipedia.org/wiki/Raster_graphics) are rectangular grids of logical pixels.
+
+For instance, a JPEG with a resolution of 800×600 is 800 logical pixels tall, and 600 logical pixels wide.
+
+</dd>
+
+<dt>Image density</dt>
+<dd>
+
+A ratio, of (linear) *logical pixels* to *CSS pixels*.
+
+For instance, if I give an image resource an image density of 2:1 (aka 2x), I am telling the browser to, by default, paint two linear logical pixels within every linear CSS pixel.
+
+If the image density of an image resource and the device pixel ratio of a browsing context are the same, then, by default, every logical pixel will be painted cleanly within exactly one physical device pixel.
+
+In HTML, developers can set this density via `srcset`'s `x` descriptors. e.g.
+
+```html
+<img srcset="hi-res.jpg 2x, low-res.jpg 1x" />
+```
+
+[Here's the spec definition of an `<img>` element’s “current pixel density”](https://html.spec.whatwg.org/multipage/images.html#current-pixel-density), which may be more confusing than helpful, honestly.
+
+</dd>
+
+<dt>Density-corrected intrinsic size</dt>
+<dd>
+
+The intrinsic size of an image, in CSS pixels, after taking into account both
+
+1. its logical dimensions, and
+2. its image density
+
+For instance, if I have an 800×600 JPEG, but give it an image density of 2x, it will have a density-corrected intrinsic size of 400×300.
+
+This size is available to developers via the `.naturalWidth` and `.naturalHeight` properties of `<img>` elements, in the DOM.
+
+[Spec definition of density-corrected intrinsic dimensions](https://html.spec.whatwg.org/multipage/images.html#density-corrected-intrinsic-width-and-height)
+
+</dd>
+
+</dl>
