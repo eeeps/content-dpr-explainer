@@ -1,3 +1,7 @@
+**👉 Note: this proposal has been superseded by [EXIF-based intrinsic sizing](https://github.com/eeeps/exif-intrinsic-sizing-explainer)**
+
+---
+
 # Content-DPR explainer
 
 By default, browsers display images at their [“density-corrected intrinsic size”](https://html.spec.whatwg.org/multipage/images.html#density-corrected-intrinsic-width-and-height). [An 800×600, 1x image will display at 800×600 CSS `px`](https://codepen.io/eeeps/pen/mdbmbPq). [A 1600×1200, 2x image will *also* display at 800×600 CSS `px`](https://codepen.io/eeeps/pen/mdbmbEq). Even though the two images have different resource dimensions, as far as layout is concerned, they are identically-sized.
